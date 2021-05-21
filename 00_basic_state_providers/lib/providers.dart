@@ -5,9 +5,9 @@
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:basic_state_providers/Notifiers/change_notifier.dart';
-import 'package:basic_state_providers/Notifiers/state_notifier.dart';
-import 'package:basic_state_providers/Notifiers/counter_state_notifier.dart';
+import 'package:basic_state_providers/notifiers/change_notifier.dart';
+import 'package:basic_state_providers/notifiers/state_notifier.dart';
+import 'package:basic_state_providers/notifiers/counter_state_notifier.dart';
 import 'package:basic_state_providers/models/counter.dart';
 
 // Instantiate the notifier only

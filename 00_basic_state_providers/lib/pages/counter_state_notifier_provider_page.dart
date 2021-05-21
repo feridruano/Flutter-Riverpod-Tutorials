@@ -1,10 +1,10 @@
-// Change Notifier Provider Page
-// State = A primative integer.
+// Counter State Notifier Provider Page
+// State = A Counter class wrapping an integer.
 // A basic page with a counter with decrement and increment buttons.
-// However, state is NOT externally modifiable and NOT immutable. Therefore, we
+// However, state is NOT externally modifiable and IS immutable. Therefore, we
 // must read through a provider's notifier to access a state's operations.
 // ConsumerWidget replaces StatelessWidget to watch state changes and rebuild
-// There is a better Consumer widget allows us to keep StatelessWidget and
+// There is a better Consumer widget that allow us to keep StatelessWidget and
 // only rebuild the widgets necessary when the state changes. Not shown in this project.
 
 import 'package:flutter/material.dart';
@@ -12,23 +12,23 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:basic_state_providers/providers.dart';
 
-class ChangeNotifierProviderPage extends ConsumerWidget {
-  const ChangeNotifierProviderPage({Key? key}) : super(key: key);
+class CounterStateNotifierProviderPage extends ConsumerWidget {
+  const CounterStateNotifierProviderPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, ScopedReader watch) {
-    final int count = watch(integerChangeNotifierProvider).count;
+    final counter = watch(counterStateNotifierProvider);
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Change Notifier Provider'),
+        title: const Text('Counter State Notifier Provider'),
         centerTitle: true,
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            '$count',
+            '${counter.count}',
             style: const TextStyle(fontSize: 36),
           ),
           const SizedBox(height: 32),
@@ -36,8 +36,9 @@ class ChangeNotifierProviderPage extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               ElevatedButton(
-                onPressed:
-                    context.read(integerChangeNotifierProvider).decrement,
+                onPressed: context
+                    .read(counterStateNotifierProvider.notifier)
+                    .decrement,
                 child: const Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Icon(Icons.exposure_minus_1),
@@ -45,8 +46,9 @@ class ChangeNotifierProviderPage extends ConsumerWidget {
               ),
               const SizedBox(width: 32),
               ElevatedButton(
-                onPressed:
-                    context.read(integerChangeNotifierProvider).increment,
+                onPressed: context
+                    .read(counterStateNotifierProvider.notifier)
+                    .increment,
                 child: const Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Icon(Icons.exposure_plus_1),
